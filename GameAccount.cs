@@ -37,33 +37,63 @@ namespace Lab1
         public GameAccount(string name)
         {
             UserName = name;
-           int  count = 0;
+           
         }
 
         private List<CalcuRating> allRating = new List<CalcuRating>();
 
        public void WinGame(string oponnent, int rating )
         {
-            if (rating <= 1)
+            try
             {
-                throw new ArgumentOutOfRangeException(nameof(rating), "Amount of deposit must be positive");
+                if (rating <= 1)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(rating), "Rating must be positive");
+                }
             }
-            var winGame = new CalcuRating(1, oponnent, "Win" , rating);
-            allRating.Add(winGame);
-        }
+            catch { }
+            
+                var winGame = new CalcuRating(1, oponnent, "Win", rating);
+                allRating.Add(winGame);
+
+            }
 
         public void LoseGame( string oponnent, int rating )
         {
-            if (rating <= 1)
+            try
             {
-                throw new ArgumentOutOfRangeException(nameof(rating), "Rating must be positive");
+                if (rating <= 1)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(rating), "Rating must be positive");
+                }
+                if (CurrentRating - rating < 0)
+                {
+                    throw new InvalidOperationException("Rating must be positive");
+                }
             }
-            if(CurrentRating - rating < 0)
-            {
-                throw new InvalidOperationException("Rating must be positive");
-            }
+            catch { }
             var loseGame = new CalcuRating(1, oponnent, "Lose", -rating);
             allRating.Add(loseGame);
+        }
+
+        public void DrawGame(string oponnent, int rating)
+        {
+            try
+            {
+                if (rating <= 1)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(rating), "Rating must be positive");
+                }
+                if (CurrentRating - rating < 0)
+                {
+                    throw new InvalidOperationException("Rating must be positive");
+                }
+            }
+            catch {}
+           
+                var drawGame = new CalcuRating(1, oponnent, "Draw", -rating);
+                allRating.Add(drawGame);
+            
         }
 
         public string GetStats()

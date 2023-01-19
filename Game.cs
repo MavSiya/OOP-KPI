@@ -29,11 +29,15 @@ namespace Lab1
             int answUser2 = rnd.Next(0, 2);
 
 
-            if (answUser1 == answer)
+            if (answUser1 == answer && answUser2 == answer)
             {
-                User1.WinGame(User2.UserName, Rating);
-                User2.LoseGame(User1.UserName, Rating);
-
+                User1.DrawGame(User1.UserName, Rating);
+                User2.DrawGame(User2.UserName, Rating);
+            }
+            else if (answUser1 != answer && answUser2 != answer)
+            {
+                User1.DrawGame(User1.UserName, Rating);
+                User2.DrawGame(User2.UserName, Rating);
             }
             else if (answUser2 == answer)
             {
@@ -41,10 +45,10 @@ namespace Lab1
                 User1.LoseGame(User2.UserName, Rating);
 
             }
-            else if (answUser1 == answer && answUser2 == answer)
+            else if (answUser1 == answer)
             {
-                User1.WinGame(User1.UserName, Rating);
-                User2.WinGame(User2.UserName, Rating);
+                User1.WinGame(User2.UserName, Rating);
+                User2.LoseGame(User1.UserName, Rating);
 
             }
 
